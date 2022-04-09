@@ -7,6 +7,7 @@ db = SessionLocal()
 
 
 def create_user(_in: UserCreate):
+    db.close()
     user_new = User(**_in.dict())
     db.add(user_new)
     try:

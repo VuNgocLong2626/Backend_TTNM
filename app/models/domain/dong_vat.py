@@ -28,3 +28,7 @@ class DongVatSinhThai(BaseModel):
 
 class DongVatNgayMauThu(BaseModel):
     ngay_thu_mau: date = Field(alias='ngay_thu_mau')
+
+
+class DongVatNguoiThuMau(BaseModel):
+    nguoi_thu_mau: str = Field(alias='nguoi_thu_mau')

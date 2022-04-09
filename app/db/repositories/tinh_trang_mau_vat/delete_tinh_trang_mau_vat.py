@@ -7,7 +7,7 @@ db = SessionLocal()
 
 def delete_tinh_trang_mau_vat(id_TinhTrangMauVat: int):
     try:
-        db.query(TinhTrangMauVat).filter(TinhTrangMauVat.id_TinhTrangMauVat == id_TinhTrangMauVat).delete()
+        db.query(TinhTrangMauVat).filter(TinhTrangMauVat.id_tinh_trang_mau_vat == id_TinhTrangMauVat).delete()
         db.commit()
         return True
     except:

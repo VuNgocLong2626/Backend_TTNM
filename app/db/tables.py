@@ -185,6 +185,7 @@ class DongVat(Base):
     ten_khoa_hoc = Column(String(250))
     ten_tieng_viet = Column(String(250))
     ten_dia_phuong = Column(String(250))
+    nguoi_thu_mau = Column(String(250))
     dia_diem = Column(UnicodeText)
     hinh_thai = Column(UnicodeText)
     sinh_thai = Column(UnicodeText)

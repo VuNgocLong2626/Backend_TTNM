@@ -37,3 +37,10 @@ class UserToken(
     _user_domain.UserHten,
 ):
     pass
+
+
+class UserLogin(    
+    _user_domain.UserMk,
+    _user_domain.UserTk
+):
+    pass

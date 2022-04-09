@@ -20,11 +20,8 @@ class GioiServices():
         return respon 
 
     def delete_gioi(id_gioi: int):
-        try:
-            delete_gioi(id_gioi)
-            raise get_gioi_done()
-        except:
-            raise get_gioi_exception()
+        delete_gioi(id_gioi)
+        raise get_gioi_done()
 
     def update_gioi(gioi_in: _gioi_schemas.GioiUpdate):
         respon = update_gioi(gioi_in)

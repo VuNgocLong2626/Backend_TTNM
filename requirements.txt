@@ -11,3 +11,9 @@ mysqlclient
 passlib[bcrypt]
 python-jose[cryptography]
 ksuid
+pandas
+xlrd
+openpyxl
+requests
+gdown
+googledrivedownloader
