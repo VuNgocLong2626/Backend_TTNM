@@ -55,9 +55,9 @@ def read(user: _user_schemas.UserToken ,file: UploadFile = File(None)):
         if not bo:
             bo = create_bo(name=str(db.values[7]).strip())
 
-        ho = get_ho_by_name(str(db.values[7]).strip())
+        ho = get_ho_by_name(str(db.values[8]).strip())
         if not ho:
-            ho = create_ho(name=str(db.values[7]).strip())
+            ho = create_ho(name=str(db.values[8]).strip())
 
         gia_tri = get_giai_tri_by_name(str(db.values[16]).strip())
         if not gia_tri:
@@ -110,27 +110,27 @@ def read(user: _user_schemas.UserToken ,file: UploadFile = File(None)):
         url_1 = dowload_load_image(url_1, dong_vat.id_dong_vat)
         if url_1:
             create_image(url_1, dong_vat.id_dong_vat)
-        time.sleep(5)
+        # time.sleep(5)
         url_2 = str(db.values[10]).strip()
         url_2 = dowload_load_image(url_2, dong_vat.id_dong_vat)
         if url_2:
             create_image(url_2, dong_vat.id_dong_vat)
-        time.sleep(5)
+        # time.sleep(5)
         url_3 = str(db.values[11]).strip()
         url_3 = dowload_load_image(url_3, dong_vat.id_dong_vat)
         if url_3:
             create_image(url_3, dong_vat.id_dong_vat)
-        time.sleep(5)
+        # time.sleep(5)
         url_4 = str(db.values[12]).strip()
         url_4 = dowload_load_image(url_4, dong_vat.id_dong_vat)
         if url_4:
             create_image(url_4, dong_vat.id_dong_vat)
-        time.sleep(5)
+        # time.sleep(5)
         url_5 = str(db.values[13]).strip()
         url_5 = dowload_load_image(url_5, dong_vat.id_dong_vat)
         if url_5:
             create_image(url_5, dong_vat.id_dong_vat)
-        time.sleep(5)
+        # time.sleep(5)
         # arr.append(dowload_load_image(str(db.values[12]).strip()))
         # print(db.values[16])check_google_drive(str(db.values[12]).strip())
         # print(df.iloc[row].values[4])
@@ -198,11 +198,13 @@ def dowload_load_image(url: str, id_dong_vat: int):
 
     if not z:
         z = re.findall('(\/file\/d\/)(.*?)(?:&|$)', url)[0]
-    save_file = f'media/products/{id_dong_vat}/images'
-    file_name = get_new_filename("jpg")
-    file_location = f"{save_file}/{file_name}"
+    # save_file = f'media/products/{id_dong_vat}/images'
+    # file_name = get_new_filename("jpg")
+    # file_location = f"{save_file}/{file_name}"
     
-    gdd.download_file_from_google_drive(file_id=z[len(z)-1].replace("/view", ""),
-                                    dest_path=file_location,
-                                    unzip=True)
-    return file_location
+    # gdd.download_file_from_google_drive(file_id=z[len(z)-1].replace("/view", ""),
+    #                                 dest_path=file_location,
+    #                                 unzip=True)
+    # return file_location
+    respon = f'http://drive.google.com/uc?export=view&id={z[len(z)-1]}'
+    return respon

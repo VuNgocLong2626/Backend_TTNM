@@ -14,6 +14,8 @@ from app.db.repositories.dong_vat.update_dong_vat import update_dong_vat
 from app.db.repositories.image.create_image import create_image
 from app.db.repositories.image.get_image_by_id import get_image_by_id
 from app.db.repositories.dong_vat.get_all_by_name_all import get_all_by_name_all
+from app.db.repositories.dong_vat.get_all_dong_vat_detail import get_all_dong_vat_detail
+from app.db.repositories.dong_vat.get_filter_dong_vat import get_filter_dong_vat
 
 
 class dong_vatServices():
@@ -30,6 +32,7 @@ class dong_vatServices():
                 index
             )
             image_responses.append(image_db)
+            image_in = f'http://127.0.0.1:8000/file/?image_path={image_db}'
             create_image(image_db, respon.id_dong_vat)
         
         return respon
@@ -42,7 +45,30 @@ class dong_vatServices():
             all_dong_vat = get_all_by_name_all(name)
         all = []
         for dong_vat in all_dong_vat:
-            dong_vat = {**dong_vat.__dict__}
+            # dong_vat = {**dong_vat.__dict__}
+            all_dong_vat_detail = get_all_dong_vat_detail(dong_vat.id_dong_vat)
+            # return all_dong_vat_detail
+            dong_vat = {
+                "id_dong_vat": dong_vat.id_dong_vat,
+                "hinh_thai": dong_vat.hinh_thai,
+                "sinh_thai": dong_vat.sinh_thai,
+                "ngay_thu_mau": dong_vat.ngay_thu_mau,
+                "ten_khoa_hoc": dong_vat.ten_khoa_hoc,
+                "ten_tieng_viet": dong_vat.ten_tieng_viet,
+                "ten_dia_phuong": dong_vat.ten_dia_phuong,
+                "nguoi_thu_mau": dong_vat.nguoi_thu_mau,
+                "dia_diem" : dong_vat.dia_diem,
+                "name_gioi": all_dong_vat_detail.Gioi.name,
+                "name_nganh": all_dong_vat_detail.Nganh.name,
+                "name_lop": all_dong_vat_detail.Lop.name,
+                "name_bo": all_dong_vat_detail.Bo.name,
+                "name_ho": all_dong_vat_detail.Ho.name,
+                "name_giai_tri": all_dong_vat_detail.GiaTri.name,
+                "name_tinh_trang_bao_ton": all_dong_vat_detail.TinhTrangBaoTon.name,
+                "name_tinh_trang_mau_vat": all_dong_vat_detail.TinhTrangMauVat.name,
+                "name_phan_bo": all_dong_vat_detail.PhanBo.name,
+                "name_sinh_canh": all_dong_vat_detail.SinhCanh.name
+            }
             all_image = get_list_path_by_id_product_detail(dong_vat.get("id_dong_vat"))
             dong_vat.update({"list_image": all_image})
             all.append(dong_vat)
@@ -61,7 +87,36 @@ class dong_vatServices():
         return respon
 
     def get_filter(_in: _dong_vat_schemas.DongVatFilter):
-        return
+        all_dong_vat = get_filter_dong_vat(_in)
+        all = []
+        for dong_vat in all_dong_vat:
+            dv = {}
+            dv = {
+                "id_dong_vat": dong_vat.DongVat.id_dong_vat,
+                "hinh_thai": dong_vat.DongVat.hinh_thai,
+                "sinh_thai": dong_vat.DongVat.sinh_thai,
+                "ngay_thu_mau": dong_vat.DongVat.ngay_thu_mau,
+                "ten_khoa_hoc": dong_vat.DongVat.ten_khoa_hoc,
+                "ten_tieng_viet": dong_vat.DongVat.ten_tieng_viet,
+                "ten_dia_phuong": dong_vat.DongVat.ten_dia_phuong,
+                "nguoi_thu_mau": dong_vat.DongVat.nguoi_thu_mau,
+                "dia_diem" : dong_vat.DongVat.dia_diem,
+                "name_gioi": dong_vat.Gioi.name,
+                "name_nganh": dong_vat.Nganh.name,
+                "name_lop": dong_vat.Lop.name,
+                "name_bo": dong_vat.Bo.name,
+                "name_ho": dong_vat.Ho.name,
+                "name_giai_tri": dong_vat.GiaTri.name,
+                "name_tinh_trang_bao_ton": dong_vat.TinhTrangBaoTon.name,
+                "name_tinh_trang_mau_vat": dong_vat.TinhTrangMauVat.name,
+                "name_phan_bo": dong_vat.PhanBo.name,
+                "name_sinh_canh": dong_vat.SinhCanh.name
+            }
+            all_image = get_list_path_by_id_product_detail(dong_vat.DongVat.id_dong_vat)
+            dv.update({"list_image": all_image})
+            all.append(dv)
+        return all
+
 
     def tes():        
         dong_vat_in = _dong_vat_schemas.DongVatCreate(**{
