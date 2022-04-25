@@ -59,6 +59,10 @@ class UserServices():
         except:
             raise get_user_exception()
 
+    def get_all_user():
+        respon = get_all_user()
+        return respon
+
 
 def get_user_exception():
     credentials_exception = HTTPException(

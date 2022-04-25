@@ -25,3 +25,8 @@ async def create_user(user_in: _user_schemas.UserCreate):
 @router.get("/")
 async def get_token(user: dict = Depends(get_current_user)):
     return user
+
+@router.get("/get-all/")
+async def get_all_user(user: dict = Depends(get_current_user)):
+    respon = UserServices.get_all_user()
+    return respon
