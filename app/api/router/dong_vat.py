@@ -84,3 +84,8 @@ async def get_test():
 async def get_filter(_in: _dong_vat_schemas.DongVatFilter):
     respon = dong_vatServices.get_filter(_in)
     return respon
+
+@router.get("/get-detail/{id_dong_vat}")
+async def get_detail_dong_vat(id_dong_vat: int):
+    respon = dong_vatServices.get_detail_by_id(id_dong_vat)
+    return respon

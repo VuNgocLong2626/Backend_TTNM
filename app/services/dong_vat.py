@@ -16,6 +16,7 @@ from app.db.repositories.image.get_image_by_id import get_image_by_id
 from app.db.repositories.dong_vat.get_all_by_name_all import get_all_by_name_all
 from app.db.repositories.dong_vat.get_all_dong_vat_detail import get_all_dong_vat_detail
 from app.db.repositories.dong_vat.get_filter_dong_vat import get_filter_dong_vat
+from app.db.repositories.dong_vat.get_detial_by_id_dong_vat import get_detial_by_id_dong_vat
 
 
 class dong_vatServices():
@@ -117,6 +118,34 @@ class dong_vatServices():
             all.append(dv)
         return all
 
+    def get_detail_by_id(id_dong_vat: int):
+        dong_vat = get_detial_by_id_dong_vat(id_dong_vat)
+        
+        dv = {}
+        dv = {
+            "id_dong_vat": dong_vat.DongVat.id_dong_vat,
+            "hinh_thai": dong_vat.DongVat.hinh_thai,
+            "sinh_thai": dong_vat.DongVat.sinh_thai,
+            "ngay_thu_mau": dong_vat.DongVat.ngay_thu_mau,
+            "ten_khoa_hoc": dong_vat.DongVat.ten_khoa_hoc,
+            "ten_tieng_viet": dong_vat.DongVat.ten_tieng_viet,
+            "ten_dia_phuong": dong_vat.DongVat.ten_dia_phuong,
+            "nguoi_thu_mau": dong_vat.DongVat.nguoi_thu_mau,
+            "dia_diem" : dong_vat.DongVat.dia_diem,
+            "name_gioi": dong_vat.Gioi.name,
+            "name_nganh": dong_vat.Nganh.name,
+            "name_lop": dong_vat.Lop.name,
+            "name_bo": dong_vat.Bo.name,
+            "name_ho": dong_vat.Ho.name,
+            "name_giai_tri": dong_vat.GiaTri.name,
+            "name_tinh_trang_bao_ton": dong_vat.TinhTrangBaoTon.name,
+            "name_tinh_trang_mau_vat": dong_vat.TinhTrangMauVat.name,
+            "name_phan_bo": dong_vat.PhanBo.name,
+            "name_sinh_canh": dong_vat.SinhCanh.name
+        }
+        all_image = get_list_path_by_id_product_detail(dong_vat.DongVat.id_dong_vat)
+        dv.update({"list_image": all_image})
+        return dv
 
     def tes():        
         dong_vat_in = _dong_vat_schemas.DongVatCreate(**{
